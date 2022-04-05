@@ -1,0 +1,19 @@
+/* Module Blague */
+.hide {
+    background: black;
+    color: black;
+
+    cursor: pointer;
+
+    transition: .25s ease-in-out;
+
+    font-weight: bold;
+}
+
+.display {
+    opacity: 1;
+
+    background: linear-gradient(to right, rgb(255, 0, 0), rgb(228, 195, 7), rgb(52, 187, 18), rgb(0, 140, 255), rgb(255, 0, 179));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

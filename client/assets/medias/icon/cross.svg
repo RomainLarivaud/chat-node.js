@@ -1,0 +1,12 @@
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+    <defs>
+        <style>
+            .cls-1 {
+                fill: #fff;
+            }
+        </style>
+    </defs>
+    <title>cross</title>
+    <polygon class="cls-1"
+        points="500 210 290 210 290 0 210 0 210 210 0 210 0 290 210 290 210 500 290 500 290 290 500 290 500 210" />
+</svg>

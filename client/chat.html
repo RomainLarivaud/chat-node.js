@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script> <!-- fichier injecté par NodeJS -->
+	<script src="/modules/emojis-picker/lib/emojionearea.js"></script>
+	<script src="https://kit.fontawesome.com/9099ad696d.js" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="/modules/emojis-picker/lib/emojionearea.min.css" />
+	<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+	<link rel="stylesheet" href="/modules/daffy/daffy.css" />
+	<link rel="stylesheet" href="/modules/wizz/wizz.css" />
+	<link rel="stylesheet" href="/modules/like/like.css" />
+	<link rel="stylesheet" href="/modules/tagUser/tagUser.css" />
+	<link rel="stylesheet" href="/modules/deleteMessage/deleteMessage.css" />
+	<link rel="stylesheet" href="/modules/blague/blague.css" />
+	<link rel="stylesheet" href="/modules/aimGame/aim-game.css" />
+	<link rel="stylesheet" href="/modules/moderateur/moderateur.css" />
+	<link rel="stylesheet" href="/modules/poll/poll.css" />
+	<link rel="stylesheet" href="/modules/scribblio/scribblio.css" />
+	<link rel="stylesheet" href="/modules/replyTo/replyTo.css" />
+	<link rel="stylesheet" href="/modules/avatar/avatar.css">
+</head>
+
+<body>
+
+	<div id="jeux-container">
+		<header>
+			<h2>JEUX</h2>
+		</header>
+		<main id="games">
+			<div class="game">
+				<div class="info-game">
+					<i class="fas fa-bullseye"></i>
+					<h3>Aim Game</h3>
+				</div>
+				<button class="btn-start-game" id="play-game-aim">Jouer</button>
+			</div>
+			<div class="game">
+				<div class="info-game">
+					<i class="fas fa-pencil-alt"></i>
+					<h3>Scribblio</h3>
+				</div>
+				<button class="btn-start-game" id="play-game-draw">Jouer</button>
+			</div>
+		</main>
+	</div>
+
+	<div id="chat-container">
+		<header>
+			<h1>Nom du chat</h1>
+			<div id="info-container">
+				<p class="nb-participants" id="mobileNb">0</p>
+				<button id="btn-participants">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+						<path class="cls-1"
+							d="M169.1,324.13a91.88,91.88,0,1,0-91.88-91.87A92,92,0,0,0,169.1,324.13Zm0-155.26a63.39,63.39,0,1,1-63.39,63.39A63.45,63.45,0,0,1,169.1,168.87Z" />
+						<path class="cls-1"
+							d="M496,338.38a162.26,162.26,0,0,0-78.89-139.29l-14.66,24.42a132.85,132.85,0,0,1,64.32,100.62H278.11a163.49,163.49,0,0,0-26.23-19.63l-14.67,24.42a132.82,132.82,0,0,1,64.33,100.62H35.26a134.69,134.69,0,0,1,65.07-101.08L85.82,303.94A163.2,163.2,0,0,0,6,443.78V458H330.77V443.78A162.3,162.3,0,0,0,309,362.59c-2-3.41-4.07-6.72-6.28-10H496Z" />
+						<path class="cls-1"
+							d="M334.33,218.72a91.88,91.88,0,1,0-91.88-91.87A92,92,0,0,0,334.33,218.72Zm0-155.26a63.39,63.39,0,1,1-63.39,63.39A63.47,63.47,0,0,1,334.33,63.46Z" />
+					</svg>
+				</button>
+				<button id="btn-game">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+						<path class="cls-1"
+							d="M272,167V141.75a72.56,72.56,0,1,0-43.71,0V166L25.5,283.22v87.41L249.27,500,473.05,370.63V283.22ZM203.82,72.55a46.33,46.33,0,1,1,46.33,46.33A46.38,46.38,0,0,1,203.82,72.55Zm24.8,210.67c0,.08,0,.17,0,.26,0,6.61,9.71,12,21.7,12s21.7-5.36,21.7-12c0-.09,0-.18,0-.26h0V268c8.73,4.05,14,10.25,14,16.06,0,9.72-14.72,20.55-35.84,20.55s-35.84-10.83-35.84-20.55c0-5.81,5.25-12,14-16.06v15.19Zm-.33-97.05v63.12c-18.7,5.84-31.46,19.06-31.46,34.8,0,21.33,23.42,38,53.32,38s53.32-16.71,53.32-38c0-15.74-12.77-29-31.47-34.8V187.18l166.12,96L249.27,392.39,60.43,283.22Zm3.5,283.53L43,360.54v-47L231.79,422.67ZM455.57,360.54,266.76,469.7v-47L455.57,313.52Z" />
+						<path class="cls-1"
+							d="M170.39,264.84c0-8.15-10.09-14.75-22.5-14.75-12.11,0-22,6.29-22.47,14.17-8.22,4.27-13.51,10.87-13.51,18.29,0,12.87,15.89,23.31,35.47,23.31s35.46-10.44,35.46-23.31C182.84,275.46,178,269.1,170.39,264.84Zm-.09,1.26v1.84h-.4A9.58,9.58,0,0,0,170.3,266.1ZM148,294.44c-12.41,0-22.5-6.63-22.5-14.79a7.48,7.48,0,0,1,.07-1V266.55c1.26,7.37,10.78,13.1,22.34,13.1,10.77,0,19.76-5,22-11.61.15.08.3.16.44.25v9.59a9.57,9.57,0,0,1,.18,1.77C170.48,287.81,160.41,294.44,148,294.44Z" />
+					</svg>
+				</button>
+				<button id="btn-light-dark"></button>
+			</div>
+		</header>
+
+		<main>
+			<div id="messages">
+
+			</div>
+
+		</main>
+
+		<!-- JEUX -->
+
+		<!-- module scribblio -->
+		<div id="scribblioContainer">
+			<div id="scribblio">
+				<div id="scribblio-others-mouse-pos"></div>
+			</div>
+		</div>
+		<div class="scribblioControls">
+			<div class="scribblioItem">
+				<label for="brushSize">Taille du pinceau</label>
+				<input type="range" name="brushSize" id="brushSize" min="2" max="20">
+			</div>
+		</div>
+		<div class="scribblioInfos">
+			<p id="wordToFind">Le mot à faire deviner est : <span style="font-weight: bold; color: red;"></span></p>
+			<p style="border-top: 1px solid black; padding-top: 10px;">Clic gauche : dessiner</p>
+			<p>Clic droit : effacer</p>
+			<p style="border-top: 1px solid black; padding-top: 10px;">Liste des utilisateurs</p>
+			<div class="playerList"></div>
+		</div>
+		<!-- fin module scribblio -->
+
+		<!-- Module aim game -->
+		<div class="aim-game">
+			<p>Soit le plus rapide, et fait le plus de points en cliquant sur les cibles qui apparaissent !</p>
+			<div class="stats-aim-game">
+				<div class="timer">
+					<p>Timer : </p>
+				</div>
+				<div class="compteur">
+					<p>Score : </p>
+				</div>
+			</div>
+			<div class="cibles-container">
+				<button class="start-game">Start</button>
+			</div>
+		</div>
+		<!-- Fin module aim game -->
+
+		<footer>
+			<button id="btn-toolbar">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+					<polygon class="cls-1"
+						points="500 210 290 210 290 0 210 0 210 210 0 210 0 290 210 290 210 500 290 500 290 290 500 290 500 210" />
+				</svg>
+			</button>
+			<div id="toolbar">
+				<button id="btn-meteo"></button>
+				<button id="btn-poll"></button>
+				<button id="btn-youtube"></button>
+				<button id="btn-blague"></button>
+				<button id="btn-daffy"></button>
+			</div>
+			<button id="wizz">
+				<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 627.5 422.6"
+					style="enable-background:new 0 0 627.5 422.6;" xml:space="preserve">
+					<title>wizz</title>
+					<path class="st0" d="M321.7,45c-91.8,0-166.3,74.4-166.3,166.3s74.4,166.3,166.3,166.3s166.3-74.4,166.3-166.3S413.5,45,321.7,45z
+                    M189.1,181.1c0-31.3,25.4-56.7,56.7-56.7s56.7,25.4,56.7,56.7s-25.4,56.7-56.7,56.7S189.1,212.4,189.1,181.1z M409.7,314
+                    c-1-1.4-27.3-36.5-83.5-8.5c-19.2,9.5-35.9,12.9-50,12.9c-13.2,0-24-2.9-32.3-6.5c-18.8-8-28.6-20.8-29-21.4l8-6l8-6.1
+                    c1.2,1.5,29.8,37.3,86.4,9.1c37.2-18.5,64.6-13.8,81.1-6.5c18.2,8,27.4,20.9,27.8,21.5L409.7,314z M399.9,237.8
+                    c-31.3,0-56.7-25.4-56.7-56.7s25.4-56.7,56.7-56.7s56.7,25.4,56.7,56.7S431.3,237.8,399.9,237.8z" />
+					<path class="st1" d="M273.4,321.4c-6.7,0-13.4-1-19.8-3.1c-16.9-5.6-25.7-16.4-26.7-17.6c-3.4-4.4-2.6-10.7,1.8-14
+                    c4.3-3.3,10.5-2.6,13.9,1.6c1.1,1.4,25.5,30,72.4-2c32.7-22.4,58.7-18.3,74.8-10.9c10.7,5,20,12.5,27.1,22
+                    c3.1,4.6,1.9,10.8-2.6,13.9c-4.5,3.1-10.7,1.9-13.8-2.5c-5.2-6.7-12-12-19.7-15.5c-16.4-7.2-34.7-4-54.5,9.6
+                    C305.4,316.9,287.5,321.4,273.4,321.4z" />
+					<circle class="st0" cx="399.9" cy="198.6" r="25.9" />
+					<circle class="st0" cx="245.8" cy="165.3" r="25.9" />
+					<path class="st2" d="M470,387.6c-5.5,0-10-4.5-10-10c0-3.1,1.4-6.1,3.9-8c87.4-67,104-192.1,37.1-279.5
+                    c-10.7-13.9-23.1-26.4-37.1-37.1c-4.2-3.5-4.8-9.8-1.3-14.1c3.3-4,9.2-4.8,13.4-1.8c26.3,20.2,47.7,46,62.6,75.5
+                    c31.2,62.1,31.2,135.3,0,197.4c-15,29.5-36.4,55.3-62.6,75.5C474.3,386.8,472.2,387.6,470,387.6z" />
+					<path class="st2"
+						d="M156.6,387.6c-2.2,0-4.3-0.7-6.1-2.1c-26.3-20.2-47.6-46-62.6-75.5c-31.2-62.1-31.2-135.3,0-197.4
+                    c15-29.5,36.4-55.3,62.6-75.5c4.4-3.3,10.7-2.3,14,2.1c3.2,4.3,2.4,10.4-1.8,13.7c-87.4,66.9-104.1,192.1-37.1,279.5
+                    c10.7,14,23.2,26.4,37.1,37.1c4.4,3.4,5.2,9.6,1.9,14C162.6,386.1,159.7,387.6,156.6,387.6L156.6,387.6z" />
+					<path class="st0" d="M470.1,396.7l-15.7-25.6c0.2-0.1,21.4-13.4,42.1-39.9c27.4-34.9,41.4-75.3,41.4-120c0-44.7-13.9-85-41.2-119.9
+                    c-20.7-26.4-41.8-39.6-42-39.8l15.7-25.6c1,0.6,25.1,15.6,49.1,45.8c22.1,27.8,48.4,74.6,48.4,139.4c0,64.8-26.4,111.7-48.6,139.6
+                    C495.3,381.1,471.1,396.1,470.1,396.7z" />
+					<path class="st0" d="M164.9,396.6c-1-0.6-25.1-15.6-49.1-45.8C93.8,323,67.5,276.2,67.5,211.4c0-64.8,26.4-111.7,48.6-139.6
+                    c24-30.2,48.2-45.2,49.2-45.9l15.7,25.6c-0.2,0.1-21.4,13.4-42.1,39.9c-27.4,34.9-41.4,75.3-41.4,120c0,44.7,13.9,85,41.2,119.9
+                    c20.7,26.4,41.8,39.6,42,39.8L164.9,396.6z" />
+				</svg>
+			</button>
+			<p id="replyToText">Répondre</p>
+			<input autofocus type="text" id="message-input" list="lstUsernameTag" placeholder="Écrivez un message..." />
+			<button id="send-message">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 497.68 447.78">
+					<path class="cls-1"
+						d="M500,250,2.32,26.15,97,250,2.32,473.93ZM90.14,116,336.75,226.91H137.08ZM137.23,272.8H337.54L90.14,384.1Z"
+						transform="translate(-2.32 -26.15)" />
+				</svg>
+			</button>
+		</footer>
+	</div>
+
+	<div id="liste-participants-container">
+		<header>
+			<h2>Liste des participants</h2>
+			<div id="info-participants">
+				<p class="nb-participants">0</p>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+					<path class="cls-1"
+						d="M169.1,324.13a91.88,91.88,0,1,0-91.88-91.87A92,92,0,0,0,169.1,324.13Zm0-155.26a63.39,63.39,0,1,1-63.39,63.39A63.45,63.45,0,0,1,169.1,168.87Z">
+					</path>
+					<path class="cls-1"
+						d="M496,338.38a162.26,162.26,0,0,0-78.89-139.29l-14.66,24.42a132.85,132.85,0,0,1,64.32,100.62H278.11a163.49,163.49,0,0,0-26.23-19.63l-14.67,24.42a132.82,132.82,0,0,1,64.33,100.62H35.26a134.69,134.69,0,0,1,65.07-101.08L85.82,303.94A163.2,163.2,0,0,0,6,443.78V458H330.77V443.78A162.3,162.3,0,0,0,309,362.59c-2-3.41-4.07-6.72-6.28-10H496Z">
+					</path>
+					<path class="cls-1"
+						d="M334.33,218.72a91.88,91.88,0,1,0-91.88-91.87A92,92,0,0,0,334.33,218.72Zm0-155.26a63.39,63.39,0,1,1-63.39,63.39A63.47,63.47,0,0,1,334.33,63.46Z">
+					</path>
+				</svg>
+			</div>
+		</header>
+		<main>
+			<div class="participant">
+				<img src="" alt="">
+				<p></p>
+			</div>
+		</main>
+	</div>
+
+	<div id="background">
+		<img id="cube" src="./medias/background/cube.png" alt="">
+		<img id="cylindre" src="./medias/background/cylindre.png" alt="">
+		<img id="sphere" src="./medias/background/sphere.png" alt="">
+		<img id="triangle" src="./medias/background/triangle.png" alt="">
+	</div>
+
+	<script type="text/javascript" src="chat.js"></script>
+	<script type="text/javascript" src="/modules/youtube/youtube.js"></script>
+	<script type="text/javascript" src="/modules/konami/konami.js"></script>
+	<script type="text/javascript" src="./modules/tagUser/tagUser.js"></script>
+	<script type="text/javascript" src="./modules/deleteMessage/deleteMessage.js"></script>
+	<script type="text/javascript" src="/modules/poll/poll.js"></script>
+	<script type="text/javascript" src="modules/scribblio/scribblio.js"></script>
+	<script type="text/javascript" src="/modules/replyTo/replyTo.js"></script>
+	<!-- Module Avatar (Ajout d'un avatar) par abjm-project -->
+	<script type="text/javascript" src="/modules/avatar/avatar.js"></script>
+</body>
+
+</html>

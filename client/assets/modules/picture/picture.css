@@ -1,0 +1,46 @@
+/* ------------------- TRAITEMENT BOUTON IMAGE ---------------------- */
+
+#btn{
+	background-color: #fff;
+  	border: 3px solid #777;
+  	color: #777;
+  	padding: 10px 10px;
+  	border-radius: 10px;
+  	font-size: 12px;
+  	font-weight: bold;
+	width: 160px;
+}
+
+#sendImage {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+}
+
+#image-input{
+	left: 0;
+  	top: 0;
+  	opacity: 0;
+  	position: absolute;
+  	font-size: 90px;
+	width: 166px;
+	height: 40px;
+}
+
+/* ------------------- TRAITEMENT DROPZONE ---------------------- */
+
+#dropzone{
+	position: absolute;
+	background-color: none;
+	opacity: 1;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.dz-preview{
+	display: none;	
+}

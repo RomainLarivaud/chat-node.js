@@ -1,0 +1,9 @@
+/* module tagUser */
+
+.message.tagged { 
+  background-color :rgba(255,215,0,0.2);
+} 
+
+#messages .message.tagged:nth-child(2n) {
+  background-color :rgba(255,215,0,0.2) ;
+}

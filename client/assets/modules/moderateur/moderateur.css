@@ -1,0 +1,11 @@
+/* Module Moderateur */
+.moderateur{
+    background: url(angry.gif) no-repeat;
+    background-size: contain;
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    margin: 0px 10px;
+    vertical-align: middle;
+	font-size:0;
+}
